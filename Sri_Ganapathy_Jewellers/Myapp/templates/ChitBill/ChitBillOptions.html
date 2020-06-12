@@ -1,0 +1,46 @@
+{% extends "FirstApp/base.html" %}
+{% block body-block %}
+<div class="content" style="width: 1900px;">
+    <div class="row">
+        <div class="col-6">
+            <div class="col6content1" style="font-size: 200%;text-align: center;">
+                <a href="{% url 'jewel:ChitBillNew' %}"><i class="fas fa-user-plus fa-9x"></i><p style="transform: translateX(-15%);">Start a New Chit</p></a><br>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="col6content2" style="font-size: 200%;text-align: left;">
+                <a href="Update/"><i class="fas fa-edit fa-9x"></i><p>Update a Existing Chit</p></a><br>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+.col6content1
+{
+    margin-left: 500px;
+    opacity: 0.5;
+    margin-top: 200px;
+    transition: 0.3s linear;
+    border-right: 1px solid black;
+    margin-bottom: 50px;
+}
+.col6content2
+{
+    margin-left: 100px;
+    opacity: 0.5;
+    margin-top: 200px;
+    transition: 0.3s linear;
+    margin-bottom: 50px;
+}
+.col6content1 > a:hover
+{
+    transform: scale(1.1);
+    color: black;
+}
+.col6content2 > a:hover
+{
+    transform: scale(1.1);
+    color: black;
+}
+</style>
+{% endblock %}

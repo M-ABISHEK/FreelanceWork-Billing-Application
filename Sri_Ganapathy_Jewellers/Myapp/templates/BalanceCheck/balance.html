@@ -1,0 +1,129 @@
+{% extends "FirstApp/base.html" %}
+{% block body-block %}
+<div class="content" style="width: 1900px;">
+    <div class="row">
+        <!-- <div class="col-3">
+            <div class="balancereduction">
+                <div class="balancereductionhead">
+                    <h5><u>Balance Reduction</u></h5>
+                </div>
+                <div style="text-align: center;padding: 10px;">
+                    <h5><u>To be Paid</u></h5>
+                </div>
+                {% if error %}
+                    <p style="color: red;">{{error}}</p>
+                {% endif %}
+                <div class="balancereductionbody">
+                    <div class="form1">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <label for="Bill_No">Bill No</label>
+                            <input type="text" name="BillNo" id="Bill_No" class="form-control" required>
+                            <label for="Balance">Balance</label>
+                            <input type="text" name="Balance" id="Balance" class="form-control" required>
+                            <div style="text-align: center;padding: 10px;">
+                                <button type="submit" class="btn btn-outline-primary">Update</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <div class="col-6">
+            <div class="ToBePaidcontent">
+                <div class="ToBePaidhead" style="text-align: center;">
+                    <h5><u>To Be Paid</u></h5>
+                </div>
+                <div class="ToBePaidbody">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Bill No</th>
+                                <th>Date</th>
+                                <th>Name</th>
+                                <th>Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for data in d1 %}
+                                {% if data.Balance != "0" %}
+                                    <tr>
+                                        <td>{{data.user.Bill_No}}</td>
+                                        <td>{{data.user.Date}}</td>
+                                        <td><a href="{{data.user.Bill_No}}/To_Be_Paid">{{data.user.user.Name}}</a></td>
+                                        <td>{{data.Balance}}</td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="ToPaycontent">
+                <div class="ToPayhead">
+                    <h5><u>To Pay</u></h5>
+                </div>
+                <div class="ToPaybody">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Bill No</th>
+                                <th>Date</th>
+                                <th>Shop Name</th>
+                                <th>Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for data in d2 %}
+                                {% if data.TotalBalance != "0" %}
+                                    <tr>
+                                        <td>{{data.Dealer.Stock_No}}</td>
+                                        <td>{{data.Dealer.Date}}</td>
+                                        <td><a href="{{data.Dealer.id}}/ToPay">{{data.Dealer.Dealer_Name}}</a></td>
+                                        <td>{{data.TotalBalance}}</td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+.balancereduction
+{
+    margin-top: 35%;
+    padding: 20px;
+    border: 1px solid black;
+    margin-right: 150px;
+    margin-left: 50px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    box-shadow: black 1px 0px 10px;
+}
+.balancereductionhead
+{
+    text-align: center;
+    padding: 10px;
+}
+.ToBePaidcontent,.ToPaycontent
+{
+    margin-top: 20px;
+    text-align: center;
+    margin-bottom: 50px;
+    margin-left: 10px;
+}
+.ToBePaidhead,.ToPayhead
+{
+    margin-bottom:20px;
+}
+.ToBePaidbody,.ToPaybody
+{
+    box-shadow: black 1px 0px 10px;
+}
+</style>
+{% endblock %}

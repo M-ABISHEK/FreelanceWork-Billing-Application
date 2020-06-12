@@ -1,0 +1,80 @@
+{% extends 'FirstApp/base.html' %}
+{% block body-block %}
+<div class="content" style="width: 1900px;">
+    <div class="allitemscontent">
+        <div class="allitemshead">
+            <h4><u>List Of Bills</u></h4>
+        </div>
+        <div class="allitemsbody">
+            <div class="row">
+                <div class="col-6">
+                    <h3><u>GST Bills</u></h3>
+                    <table class="table table-bordered" style="box-shadow: black 1px 0px 10px;">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Bill No</th>
+                                <th>Name</th>
+                                <th>Phone Number</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>      
+                            {% for data in data %}
+                                {% if data.GST_Tax != "0.0" %}     
+                                    <tr>
+                                        <td>{{data.user.Bill_No}}</td>
+                                        <td><a href="{{data.user.Bill_No}}" style="text-decoration: none;">{{data.user.user.Name}}</a></td>
+                                        <td>{{data.user.user.PhoneNumber}}</td>
+                                        <td>{{data.user.Date}}</td>
+                                    </tr>    
+                                {% endif %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-6">
+                        <h3><u>No GST Bills</u></h3>
+                        <table class="table table-bordered" style="box-shadow: black 1px 0px 10px;">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Bill No</th>
+                                    <th>Name</th>
+                                    <th>Phone Number</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>      
+                                {% for data in data %}
+                                    {% if data.GST_Tax == "0.0" %}     
+                                        <tr>
+                                            <td>{{data.user.Bill_No}}</td>
+                                            <td><a href="{{data.user.Bill_No}}" style="text-decoration: none;">{{data.user.user.Name}}</a></td>
+                                            <td>{{data.user.user.PhoneNumber}}</td>
+                                            <td>{{data.user.Date}}</td>
+                                        </tr>    
+                                    {% endif %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+.allitemscontent
+{
+    text-align: center;
+}
+.allitemsbody
+{
+    padding: 20px;
+    padding-left: 300px;
+    padding-right: 300px;
+}
+.allitemshead
+{
+    margin-top: 50px;
+}
+</style>
+{% endblock %}

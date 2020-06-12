@@ -1,0 +1,211 @@
+{% extends "FirstApp/base.html" %}
+{% block body-block %}
+<div class="content" style="width: 1900px;">
+    <div class="row">
+        <div class="col-1"> 
+            <!-- <form >
+                <input type="button" value="Go Back" onclick="history.back()" class="btn btn-outline-primary"  style="position: fixed;">
+            </form>   -->
+        </div>
+            <div class="col-3">
+                <div class="col3content" >
+                    <div class="col3head">
+                        <h3><u>Update Chit</u></h3>
+                    </div>
+                    <div class="col3body">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <label for="Phonenumber">Phone Number</label>
+                            <input type="text" name="Phonenumber" id="Phonenumber" class="form-control">
+                            <div style="text-align: center;margin-top: 10px;margin-bottom: 10px;">
+                                <h5><u>( OR )</u></h5>
+                            </div>
+                            <label for="ChitNo">Chit No</label>
+                            <input type="text" name="chitno" id="ChitNo" class="form-control">
+                            <label for="Amount">Amount</label>
+                            <input type="text" name="Amount" id="Amount" class="form-control">
+                            <div style="margin-top: 10px;text-align: center;">
+                                <button type="submit" class="btn btn-outline-success">Update</button>
+                            </div>     
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% if data %}
+        <div class="col-4">
+            <div class="col8content">
+                <div class="col8head" style="margin-top: 50px;margin-bottom: 10px;text-align: center;transform: translateX(10%);">
+                    <h3><u>Chit Details</u></h3>                
+                </div>
+                <div class="col8body">
+                    <table class="table table-bordered" style="transform: translateX(-10%);width: 1000px;text-align: center;box-shadow: black 1px 0px 10px;">
+                        <thead>
+                            <tr>
+                                <th>Chit No</th>
+                                <th>Name</th>
+                                <th>Type of Scheme</th>
+                                <th>Number of Months/Weeks</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for data in data %}
+                                <tr>
+                                    <td>{{data.Chit_No}}</td>
+                                    <td><a href="{{data.id}}" style="text-decoration: none;">{{data.Name.Name}}</a></td>
+                                    <td>{{data.Type_Of_Scheme}}</td>
+                                    <td>{{data.Number_Of_Months_or_Weeks}}</td>
+                                    <td>{{data.Amount}}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        {% elif check %}
+        <div class="col-4">
+            <div class="col8content" style="position: fixed;">
+                <div class="col8head" style="margin-top: 50px;margin-bottom: 10px;text-align: center;">
+                    <h3><u>Chit Details</u></h3>
+                </div>
+                <div class="col8body">
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for check in check %}
+                                <tr>
+                                    <td>Chit Number</td>
+                                    <td>: {{check.Name.Chit_No}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>: {{check.Name.Name.Name}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Phone Number</td>
+                                    <td>: {{check.Name.Name.PhoneNumber}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Start Date</td>
+                                    <td>: {{check.Name.Start_Date}}</td>
+                                </tr>
+                                <tr>
+                                    <td>End Date</td>
+                                    <td>: {{check.Name.End_Date}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Address</td>
+                                    <td style="width: 300px;">: {{check.Name.Address}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Type of Scheme</td>
+                                    <td>: {{check.Name.Type_Of_Scheme}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Number_Of_Months_or_Weeks</td>
+                                    <td>: {{check.Name.Number_Of_Months_or_Weeks}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Amount</td>
+                                    <td>: {{check.Name.Amount}}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <div style="text-align: center;margin-top: 20px;">
+                        {% for check in check %}
+                            {% if check.Status == "Closed" %}
+                                <h3 class="text-danger"><u>This Chit Bill was Closed</u></h3>
+                            {% else %}
+                                <a href="Close/" class="btn btn-outline-danger">Close This Chit</a>
+                            {% endif %}
+                        {% endfor %}    
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% elif error %}
+        <div class="col-4">
+            <div class="col8content">
+                <div class="col8head" style="margin-top: 50px;margin-bottom: 10px;text-align: center;transform: translateX(10%);">
+                    <h3><u>Chit Details</u></h3>
+                </div>
+                <div class="col8body">
+                    <div style="text-align: center;transform: translateX(10%);margin-top: 250px;" class="text-danger">
+                        <i class="fas fa-times fa-9x" style="opacity: 0.5;"></i>
+                            <h3 class="text-danger">{{error}}</h3>
+                    </div>     
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% if ziplist %}
+            <div class="col-3" style="margin-top: 20px;text-align: center;">
+                <table class="table table-bordered" style="box-shadow: black 1px 0px 10px;margin-top: 50px;">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for check in ziplist %}
+                            <tr>
+                                <td>{{check.0}}</td>
+                                <td>{{check.1}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+    </div>
+</div>
+<style>
+.col-1
+{
+    margin-left: 50px;
+    margin-top: 50px;
+}
+.col3head
+{
+    background-color: rgb(49,49,49);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+.col3content
+{
+    width: 300px;
+    margin-top: 220px;
+    border: 1px solid black;
+    position: fixed;
+    transform: translateX(-5%);
+    margin-bottom: 50px;
+    box-shadow: black 1px 0px 10px;
+}
+.content
+{
+    font-size: 110%;
+}
+.col3body
+{
+    padding: 20px;
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+.col8content
+{
+    margin-bottom: 50px;
+}
+</style>
+
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends 'FirstApp/base.html' %}
+{% block body-block %}
+    <div style="margin: 20px;">
+        <a href="{% url 'jewel:resource' %}" class="btn btn-primary">Go Back</a>
+    </div>
+    <div class="content" style="width: 1900px;">
+        <div class="cam">
+            <div class="camhead">
+                <h4><u>List of Items</u></h4>
+            </div>
+            {% if Items %}
+            <div class="cambody">
+                <table class="table table-bordered" style="box-shadow: black 1px 0px 10px;width: 800px;margin-left: 550px;">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Item ID</th>
+                            <th scope="col">Item Type</th>
+                            <th scope="col">Metal</th>
+                            <th scope="col">Item </th>
+                            <th scope="col">Weight</th>
+                            <th scope="col">Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for file in Items %}
+                            <tr>
+                                <td>{{file.Item_id}}</td>
+                                <td>{{file.Item_Type}}</td>
+                                <td>{{file.Metal_Type}}</td>
+                                <td>{{file.Item_Choice}}</td>
+                                <td>{{file.Weight_In_Grams}} gms</td>
+                                <td>{{file.Quantity}}</td>
+                                <!-- <td style="text-align: left;border-color: white;"><a href="{{file.pk}}" class="btn btn-sm"><i class="fas fa-trash"> Delete</i></a>
+                                </td> -->
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+                <div class="cam2">
+                    <p><i class="fas fa-box-open fa-9x" style="color: grey;"></i></p>
+                    <h2 style="color: grey;">Empty</h2>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+<style>
+.cam
+{
+    margin-bottom: 50px;
+    text-align: center;
+    transform: translateY(-10%);
+}
+.camhead
+{
+    margin-top: 30px;
+}
+.cambody
+{
+    margin-top: 30px;
+}
+.cam2
+{
+    text-align: center;
+    margin-top: 300px;
+}
+</style>
+{% endblock %}

@@ -1,0 +1,272 @@
+{% extends 'FirstApp/base.html' %}
+{% block body-block %}
+<div class="content" style="width:1900px">
+    <div class="row">
+        <div class="col-2">
+            <div style="margin-left:50px;margin-top:50px;">
+                <a href="{% url 'jewel:Balance' %}" class="btn btn-outline-primary">Back</a>
+            </div>
+            <div class="balancereduction">
+                <div class="balancereductionhead">
+                    <h5><u>Balance Reduction</u></h5>
+                </div>
+                <div style="text-align: center;padding: 10px;">
+                    <h5><u>To be Paid</u></h5>
+                </div>
+                {% if error %}
+                    <p style="color: red;">{{error}}</p>
+                {% endif %}
+                <div class="balancereductionbody">
+                    <div class="form1">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <label for="Balance">Balance</label>
+                            <input type="text" name="Balance" id="Balance" class="form-control" required>
+                            <div style="text-align: center;padding: 10px;">
+                                <button type="submit" class="btn btn-outline-primary">Update</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="BillDetails" style="border: 1px solid black;">
+                <div class="BillDetailsHead">
+                    <h4><u>Bill Details</u></h4>
+                </div>
+                <div class="BillDetailsBody">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for d1 in d1 %}
+                                <tr>
+                                    <td>Name: {{d1.user.user.Name}}</td>
+                                    <td style="padding-left: 520px;">Bill No : {{d1.user.Bill_No}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Phone Number : {{d1.user.user.PhoneNumber}}</td>
+                                    <td style="padding-left: 520px;">Date: {{d1.user.Date}}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <table class="table tavle-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">S.No</th>
+                                <th scope="col">Item_id</th>
+                                <th scope="col" >Item_type</th>
+                                <th scope="col">Making_Charge</th>
+                                <th scope="col">Wastage</th>
+                                <th scope="col">Amount</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in data %}
+                                <tr>
+                                    <th scope="row">{{forloop.counter}}</th>
+                                    <td>{{i.0}}</td>
+                                    <td>{{i.1}}</td>
+                                    <td>{{i.2}}</td>
+                                    <td>{{i.3}}</td>
+                                    <td>{{i.4}}</td>
+                                </tr>
+                            {% endfor %}
+                            {% for check in d1 %}
+                                {% if check.GST_Tax != "0.0" %}
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>CGST</td>
+                                        <td>+ ₹ {{check.CGST_Tax}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>SGST</td>
+                                        <td>+ ₹ {{check.SGST_Tax}}</td>
+                                    </tr>
+                                {% endif %}
+                                {% if check.IGST_Tax != "0.0" %}
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>IGST</td>
+                                        <td>+ ₹ {{check.IGST_Tax}}</td>
+                                    </tr>
+                                {% endif %}
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>Discount</td>
+                                    <td>- ₹ {{check.Discount}}</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>Total</small></td>
+                                    <td>₹ {{check.Total}}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <!-- <div class="paymenthead">
+                        <h4><u>Payment</u></h4>
+                    </div> -->
+                    <div class="paymentbody">
+                        {% for check in d1 %}
+                            {% if check.Cash != "0" %}
+                            <h6><b><u>Payment Mode</u></b></h6>
+                                <p>Cash :₹ {{check.Cash}}</p>
+                            {% endif %}
+                            {% if check.Card_Amount != "0" %}
+                            <h6><b><u>Card Payment Mode</u></b></h6>
+                                <div class="row">
+                                    <div class="col-3">
+                                        <p>Card Holder Name</p>
+                                        <p>{{check.Card}}</p>
+                                    </div>
+                                    <div class="col-3">
+                                        <p>Card Number</p>
+                                        <p>{{check.Card_Holder}}</p>
+                                    </div>
+                                    <div class="col-3">
+                                        <p>Card Amount</p>
+                                        <p>₹ {{check.Card_Amount}}</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if check.Online_Amount != "0" %}
+                                <h6><b><u>UPI Payment Mode</u></b></h6>
+                                <div class="row">
+                                    <div class="col-3">
+                                        <p>UPI ID</p> 
+                                        <p>{{check.Online_Transfer_UPI}}</p>
+                                    </div>
+                                    <div class="col-3">
+                                        <p>Online Amount</p>
+                                        <p>₹ {{check.Online_Amount}}</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if check.Chit_Amount != "0" %}
+                                <h4><u>Chit Amount Reduction</u></h4>
+                                <div class="row">
+                                    <div class="col-3">
+                                        <p>Chit Number</p>
+                                        <p>{{check.Chit_No}}</p>
+                                    </div>
+                                    <div class="col-3">
+                                        <p>Chit Amount</p>
+                                        <p>₹ {{check.Chit_Amount}}</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if check.Advance != "0" %}
+                            <p><b>Advance : </b>₹ {{check.Advance}}</p>
+                            {% endif %}
+                            <p><b>Balance :</b>₹ {{check.Balance}}</p>
+                            <p><b>Total Amount Paid :</b>₹ {{check.Paid}}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="col4content">
+                <div class="col4head">
+                    <h4><u>Payments</u></h4>
+                </div>
+                <div class="col4body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Payment</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for check in zip %}
+                                <tr>
+                                    <td>{{check.0}}</td>
+                                    <td>{{check.1}}</td>
+                                    <td style="border: white;"><a href="{{forloop.counter0}}">Remove</a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+.balancereduction
+{
+    margin-top: 60%;
+    padding: 20px;
+    border: 1px solid black;
+    margin-right: 20px;
+    margin-left: 20px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    box-shadow: black 1px 0px 10px;
+}
+.balancereductionhead
+{
+    text-align: center;
+    padding: 10px;
+}
+.BillDetailsBody
+{
+    padding: 30px;
+}
+.BillDetailsHead
+{
+    text-align: center;
+    margin-top: 20px;
+}
+.BillDetails
+{
+    margin-top: 30px;
+    box-shadow: black 1px 0 20px;
+    margin-bottom: 50px;
+}
+.col4content
+{
+    margin-top: 30px;
+    margin-bottom: 50px;
+    box-shadow: black 1px 0 20px;
+}
+.col4head
+{
+    text-align: center;
+    padding-top:20px;
+}
+.col4body
+{
+    padding-right: 50px;
+    padding-left: 50px;
+    text-align: center;
+    margin-top: 20px;
+    padding-bottom: 30px;
+}
+</style>
+{% endblock %}

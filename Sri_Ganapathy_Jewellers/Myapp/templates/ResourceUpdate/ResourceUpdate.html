@@ -1,0 +1,302 @@
+{% extends "FirstApp/base.html" %}
+{% block body-block %}
+<div class="content" style="width: 1900px;">
+<!-- <div class="jumkbotron"> -->
+        <div class="row">
+            <div class="col-3">
+                <div class="anonymous" style="margin-bottom: 50px;">
+                    <div class="Phone">
+                        <h3><u>Update Items</u></h3><br>
+                    </div>
+                    <form method="post" style="padding-top: 50px;">            
+                        {% csrf_token %}
+                        {% for fields in Data %}
+                            <strong>{{fields.label_tag}}</strong>
+                            {{fields}}
+                            {% if fields.errors %}
+                                <p class="text-danger">{{fields.errors}}</p>
+                            {% endif %}
+                        {% endfor %}
+                        <small class="text-danger"><b>{{error}}</b></small>
+                        <p></p>
+                        <button type="submit" class="btn btn-primary">Update</button>        
+                    </form>   
+                </div>
+            </div>
+            <!-- <div class="col-6" style="margin-bottom: 50px;">
+                <div style="transform: translateY(230%);">
+                    <text style="margin-left: 75%;font-size: 110%;"><b><u>No of Items : {{No}}</u></b></text>
+                </div>
+                <div class="cam">
+                    <h4 style="transform: translateX(-10%);"><u>List of Items</u></h4>
+                    {% if Items %}
+                        <table class="table table-bordered" style="width: 1000px;box-shadow: black 1px 0px 10px;">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Item ID</th>
+                                    <th scope="col">Item Type</th>
+                                    <th scope="col">Metal</th>
+                                    <th scope="col">Item </th>
+                                    <th scope="col">Weight</th>
+                                    <th scope="col">Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for file in Items %}
+                                    <tr>
+                                        <td>{{file.Item_id}}</td>
+                                        <td>{{file.Item_Type}}</td>
+                                        <td>{{file.Metal_Type}}</td>
+                                        <td>{{file.Item_Choice}}</td>
+                                        <td>{{file.Weight_In_Grams}} gms</td>
+                                        <td>{{file.Quantity}}</td>
+                                        <td style="text-align: left;border-color: white;"><a href="{{file.pk}}" class="btn btn-sm"><i class="fas fa-trash"> Delete</i></a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <div class="cam2">
+                            <p><i class="fas fa-box-open fa-9x" style="color: grey;"></i></p>
+                            <h2 style="color: grey;">Empty</h2>
+                        </div>
+                    {% endif %}
+                </div>
+            </div> -->
+            <div class="col-6" style="border-bottom: 50px;">
+                <div class="catcontent" style="margin-top:30px;">
+                    <div class="catcontenthead">
+                        <h3><u>Categories</u></h3>
+                    </div>
+                    <div class="catcontentbody">
+                        <div class="row">
+                            <div class="col-2">
+                                <div class="cd">
+                                    <h5><a href="nethichuti/" style="text-decoration: none;color: black;">Nethichuti</a></h5>
+                                </div>
+                                <div class="cd">
+                                    <h5><a href="Ring/" style="text-decoration: none;color: black;">Ring</a></h5>
+                                </div>
+                                <div class="cd">
+                                    <h5><a href="ArnaKayiru/" style="text-decoration: none;color: black;">ArnaKayiru</a></h5>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="cd">
+                                    <h5><a href="Earring/" style="text-decoration: none;color: black;">Ear Ring</a></h5>
+                                </div>
+                                <div class="cd">
+                                    <h5><a href="Bangles/" style="text-decoration: none;color: black;">Bangles</a></h5>
+                                </div>
+                                <div class="cd">
+                                    <h5><a href="Metti/" style="text-decoration: none;color: black;">Metti</a></h5>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="cd">
+                                    <h5><a href="chain/" style="text-decoration: none;color: black;">Chains</a></h5>
+                                </div>
+                                <div class="cd">
+                                    <h5><a href="Bracelet/" style="text-decoration: none;color: black;">Bracelet</a></h5>
+                                </div>
+                                <div class="cd">
+                                    <h5><a href="Mookuthi/" style="text-decoration: none;color: black;">Mookuthi</a></h5>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="cd">
+                                    <h5><a href="Necklace/" style="text-decoration: none;color: black;">Necklace</a></h5>
+                                </div>
+                                <div class="cd">
+                                    <h5><a href="Kaapu/" style="text-decoration: none;color: black;">Kaapu</a></h5>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="cd">
+                                    <h5><a href="Aaram/" style="text-decoration: none;color: black;">Aaram</a></h5>
+                                </div>
+                                <div class="cd">
+                                    <h5><a href="vangi/" style="text-decoration: none;color: black;">Vangi</a></h5>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="cd">
+                                    <h5><a href="Ottiyanam/" style="text-decoration: none;color: black;">Ottiyanam</a></h5>
+                                </div>
+                                <div class="cd">
+                                    <h5><a href="Anklets/" style="text-decoration: none;color: black;">Anklets</a></h5>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-3" style="margin-bottom: 50px;">
+                <div class="third-column">
+                    <div class="topic">
+                        <h3><u>Search an Item</u></h3>
+                    </div>
+                    <form method="post" class="Search_form">
+                        {% csrf_token %}
+                        <input type="text" class="form-control" placeholder="Search an ID" name="search" style="border-radius: 20px;" required>
+                        <button type="submit" class="btn btn-sm btn-outline-primary" style="margin-left: 70px;margin-top: 10px;">Search</button>
+                    </form>
+                    <div class="Search-body">
+                        {% if searchdata %}
+                        <div class="item-found">
+                            <h4 style="text-align: center;font-family: 'Times New Roman', Times, serif;" ><u>Item Found</u></h4>
+                        </div>
+                            {% for fields in searchdata %}
+                                <div class="row">
+                                    <div class="col-6 data1" style="text-align: right;">
+                                        <p><b>Item ID : </b></p>
+                                        <p><b>Item Type : </b></p>
+                                        <p><b>Metal : </b></p>
+                                        <p><b>Item : </b></p>
+                                        <p><b>Weight : </b></p>
+                                        <p><b>Quantity : </b></p>
+                                    </div>
+                                    <div class="col-6 data1" style="transform: translateX(-30%);">
+                                        <p>{{fields.Item_id}}</p>
+                                        <p>{{fields.Item_Type}}</p>
+                                        <p>{{fields.Metal_Type}}</p>
+                                        <p>{{fields.Item_Choice}}</p>
+                                        <p>{{fields.Weight_In_Grams}} gms</p>
+                                        <p>{{fields.Quantity}}</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <p style="text-align: center;"><i class="fas fa-box-open fa-5x" style="color: grey;"></i></p>
+                            <p style="text-align: center;color: grey;font-size: 120%;font-family: 'Times New Roman', Times, serif;"><b>Empty</b></p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+<style>
+.form-control
+{
+    border-radius: 25px;
+    border: 1px solid rgb(40, 140, 207);
+    width: 200px;
+}
+.jumbotron
+{
+    background: transparent;
+}
+.btn
+{
+    margin-left: 50px;
+}
+.cam
+{
+    margin-top: 8px;
+    padding: 30px;  
+    text-align: center;
+    width: 1200px;
+    position: fixed;
+    transform: translateX(-7%);
+}
+.anonymous
+{
+    border : 1px solid black;
+    width: 300px;
+    position: fixed;
+    padding-bottom: 50px;
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-top: 100px;
+    height: auto;
+    margin-left: 100px;
+    position: fixed;
+    box-shadow: black 1px 0px 10px;
+}
+.Phone
+{
+    border: 1px solid black;
+    transform: translateY(-40%);
+    width: 300px;
+    transform: translateX(-17%);
+    text-align: center;
+    padding-top: 20px;
+    background-color: rgb(49, 49, 49);
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+}
+.third-column
+{
+    margin-top: 100px;
+    border: 1px solid black;
+    width: 300px;
+    height: 730px;
+    transform: translateX(27%);
+    position: fixed;
+    margin-right: 100px;
+    box-shadow: black 1px 0px 10px;
+}
+.topic
+{
+    border: 1px solid black;
+    text-align: center;
+    padding: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    background-color:  rgb(49, 49, 49);
+    color: white;
+}
+.Search_form
+{
+    padding: 50px;
+}
+.data1
+{
+    width: 100px;
+    padding-left: 50px;
+    padding-top: 20px;
+}
+.cam2
+{
+    padding-top:200px;
+    transform: translateX(-15%);
+}
+.Search-body
+{
+    /* border: 1px solid black; */
+    margin: 10px;
+}
+.item-found
+{
+    border: 1px solid black;
+    width: 277px;
+    background-color: rgb(53, 52, 52);
+    color: white;
+    padding: 10px;
+}
+.catcontenthead
+{
+    text-align: center;
+}
+.cd
+{
+    border: 1px solid black;
+    text-align:center;
+    padding: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    transition: linear 0.2;
+    box-shadow: 1px 0 10px black;
+    border-radius: 30px;
+}
+.cd:hover
+{
+    transform: scale(1.1);
+}
+.catcontentbody
+{
+    padding: 20px;
+}
+</style>
+{% endblock %}

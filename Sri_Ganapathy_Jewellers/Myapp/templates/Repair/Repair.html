@@ -1,0 +1,134 @@
+{% extends "FirstApp/base.html" %}
+{% block body-block %}
+{{form.media}}
+<div class="content"  style="width: 1850px;">
+    <div class="row">
+        <div class="col-4">
+            <div class="col4content">
+                <div class="col4head">
+                    <h4><u>Repair Details</u></h4>
+                </div>
+                <div class="col4body">
+                    <form method="post">
+                        {% csrf_token %}
+                            <p>Item Type : </p>
+                            <p>{{form.Item_type}}</p>
+                            <p>Metal Type :</p>
+                            <p>{{form.Metal_type}}</p>
+                            <p>Description</p>
+                            <p>{{form.Description}}</p>
+                            <p>Estimated Delivery Date : </p>
+                            <p>{{form.Delivery_Estimated}}</p>
+                            <p>Amount</p>
+                            <p>{{form.Price}}</p>
+                        <div style="text-align: center;margin-top: 20px;">
+                            <input type="submit" value="Update" class="btn btn-outline-primary">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-8" >
+            <div class="col8content">
+                <div class="col8head">
+                    <h4><u>Repair Details</u></h4>
+                </div>
+                {% for data in data %}
+                <div style="text-align: right;transform: translateY(180%)translateX(-7%);">
+                    <a href="{% url 'jewel:Repair' %}" class="btn btn-outline-success" style="margin-right: 20px;">Save</a>
+                    <a href="PDF" class="btn btn-outline-primary" style="margin-right: 20px;">Print Bill</a>
+                    <a href="Delete/{{data.id}}" class="btn btn-outline-danger">Delete this Bill</a>
+                </div>
+                <div style="margin-top:20px;">
+                        <p><b>Name : {{data.Name}}</b></p> 
+                        <p><b>Phone Number : {{data.Phone_Number}}</b></p>
+                </div>
+                {% endfor %}
+                <div class="col8body">
+                    <table class="table table-bordered">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">S.No</th>
+                                <th scope="col">Metal Type</th>
+                                <th scope="col">Item Type</th>
+                                <th scope="col">Desciption</th>
+                                <th scope="col">Estimated Date</th>
+                                <th scope="col">Amount</th>
+                            </tr>
+                        </thead>
+                        {% if datas %}
+                        <tbody>
+                            {% for data in datas %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>{{data.0}}</td>
+                                    <td>{{data.1}}</td>
+                                    <td style="width: 50%;">{{data.2}}</td>
+                                    <td>{{data.3}}</td>
+                                    <td>{{data.4}}</td>
+                                    <td style="border-color:white;"><a href="{{forloop.counter0}}">&#128465; Remove</a></td>
+                                </tr>
+                            {% endfor %}
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>Total :</td>
+                                {% for data in data %}
+                                    <td>{{data.Total_Amount}}</td>
+                                {% endfor %}
+                                </tr>
+                        </tbody>
+                        {% endif %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+.col4content
+{
+    margin-top: 30px;
+    margin-left: 100px;
+    width: 350px;
+    border:1px solid black;
+    margin-bottom: 50px;
+    position: fixed;
+    box-shadow: black 1px 0px 10px;
+}
+.col4head
+{
+    padding: 20px;
+    background-color: rgb(49,49,49);
+    color: white;
+    text-align: center;
+}
+.col4body
+{
+    padding: 30px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+.form-control
+{
+    border-radius: 20px;
+}
+.col8content
+{
+    transform: translateX(-10%);
+    margin-bottom: 50px;
+}
+.col8head
+{
+    text-align: center;
+    margin-top: 10px;
+}
+.col8body
+{
+    text-align: center;
+    transform: translateY(-2%);
+}
+</style>
+{% endblock %}

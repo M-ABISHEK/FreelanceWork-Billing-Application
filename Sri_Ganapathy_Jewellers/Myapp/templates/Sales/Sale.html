@@ -1,0 +1,80 @@
+{% extends 'FirstApp/base.html' %}
+{% block body-block %}
+    <div class="row" style="width: 1900px;">
+        <div class="col-4">
+                {% if form %}
+                    <div class="container">
+                        <div class="jumbotron">
+                            <i class="fas fa-user-plus fa-7x"></i>
+                            <h4><u>New Customer</u></h4><br>
+                            <!-- <p></p> -->
+                            <form action="" method="post" >
+                                {% csrf_token %}
+                                {% for fields in form %}
+                                {{fields}} <br>
+                                    {% if fields.errors %}
+                                        {{fields.errors}}
+                                    {% endif %}
+                                {% endfor %}
+                                <button class="btn btn-primary" type="submit">Register</button>
+                            </form>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="jumbotron">
+                        <div class="container">
+                            <i class="fas fa-user-plus fa-7x"></i>
+                            <p></p>
+                            <h4><u>New Customer</u></h4><br>
+                            <p></p>
+                            <a href="{% url 'jewel:customer_register' %}" class="btn btn-outline-primary">Register a user</a><p></p><br>
+                        </div>
+                    </div>
+                {% endif %}
+        </div>
+        <div class="col-8">
+            <div class="jumbotron">
+                <div class="container">
+                    <i class="far fa-address-book fa-7x"></i>
+                    <p></p>
+                    <h4><u>Existing</u></h4><br>
+                    {% if message %}
+                        <p class="text-danger">{{message}}</p>
+                    {% endif %}
+                    {% if found %}
+                    <h5 class="text-success">Account found!!</h5>
+                    {% for found in found %}
+                        <h5>Name : <a href={{found.PhoneNumber}}/{{BillNo}}>{{found.Name}}</a></h5>
+                    {% endfor %}
+                    {% else %}
+                        <form method="post" style="text-align: center;"action="{% url 'jewel:Sale' %}">
+                            {% csrf_token %}
+                            <input class="form-control" name="name" type="search" placeholder="Search" aria-label="Search" style="border-radius: 30px;width: 300px;"  required>
+                            <br>
+                            <button class="btn btn-outline-primary" type="submit">Search</button>
+                        </form>
+                    {% endif %}
+                </div>        
+            </div>
+        </div>
+    </div>
+<style>
+.col-4,.col-8
+{
+    margin-top: 200px;
+}
+.col-4 .jumbotron, .col-8 .jumbotron
+{
+    width: 400px;
+    margin-left: 400px;
+    background-color: transparent;
+    border: black 1px solid;
+    position: fixed;
+    box-shadow: black 1px 0px 10px;
+    }
+.col-4 .container, .col-8 .container
+{
+    text-align: center;
+}
+</style>
+{% endblock %}

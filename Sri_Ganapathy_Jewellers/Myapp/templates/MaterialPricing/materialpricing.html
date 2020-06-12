@@ -1,0 +1,120 @@
+{% extends "FirstApp/base.html" %}
+{% block body-block %}
+
+<div class="content" style="width: 1900px;">
+    <div class="row">
+        <div class="col">
+            <div class="PricingUpdateForm">
+                <div class="PriceUpdateFormhead">
+                    <h4 style="transform: translateY(50%);"><u>Pricing Details</u></h4><br>
+                </div>
+                <div class="PriceUpdateFormbody">
+                     <form action="" method="POST">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                        <div style="text-align: center;">
+                            <button type="submit" class="btn btn-primary">update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            {% if form1 %}
+            <div class="message">
+                <h5>{{form1.message}}</h5>
+                <h5>{{form1.message1}}</h5>
+            </div>
+            {% else %}
+                {% for data in data %}
+                <div class="ratecontent">
+                    <div class="ratehead">
+                        <h4><u>{{data.Date}}</u></h4>
+                    </div>
+                    <div class="ratebody">
+                        <div class="row">
+                            <div class="col" style="transform: translateX(30%);">
+                                <p><b>Gold Price</b></p>
+                                <p><b>Silver Price</b></p>
+                                <p><b>Platinum Price</b></p>
+                                <p><b>Diamond Price</b></p>
+                            </div>
+                            <div class="col">
+                                <p>: &#x20B9; {{data.Gold_Price}}</p>
+                                <p>: &#x20B9; {{data.Silver_Price}}</p>
+                                <p>: &#x20B9; {{data.Platinum_Price}}</p>
+                                <p>: &#x20B9; {{data.Diamond_Price}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+<style>
+.PricingUpdateForm
+{
+    width: 400px;
+    border: 1px solid black;
+    margin-top: 200px;
+    margin-left: 450px;
+    box-shadow: black 1px 0px 20px;
+}
+.PriceUpdateFormhead
+{
+    color: white;
+    background-color: rgb(49,49,49);
+    text-align: center;
+}
+.PriceUpdateFormbody
+{
+    padding: 20px;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+.ratecontent
+{
+    border: 1px solid black;
+    width: 350px;
+    margin-top: 200px;
+    height: 500px;
+    width: 400px;
+    box-shadow: black 1px 0px 20px;
+}
+.ratehead
+{
+    color: white;
+    background-color: rgb(49,49,49);
+    padding: 10px;
+    padding-top: 15px;
+    text-align: center;
+}
+.ratebody
+{
+    padding: 20px;
+    margin-top: 100px;
+    font-size: 110%;
+}
+.message
+{
+    border: 1px solid black;
+    width: 350px;
+    margin-top: 200px;
+    height: 500px;
+    width: 400px;
+    text-align: center;
+    color: red;
+    padding-top: 23%;
+    box-shadow: black 1px 0px 10px;
+}
+.message >h5{
+    transition: linear 0.2s;
+}
+.message >h5:hover
+{
+    transform: scale(1.1);
+}
+</style>
+{% endblock %}

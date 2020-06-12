@@ -1,0 +1,48 @@
+{% extends 'FirstApp/base.html' %}
+{% load static %}
+{% block body-block %}
+<div class="content" style="width: 1900px;">
+    <div class="image" style="text-align: center;">
+        <img src="{% static 'hacker1.jpg' %}" alt="" srcset="">
+    </div>
+    <div style="text-align: center;transform: translateY(-50%);">
+        <h4>Beware Of Income Tax Officers</h4>
+    </div>
+    {% if error %}
+        <h5 class="text-danger" style="text-align: center;">{{error}}</h5>
+    {% endif %}
+    <div style="text-align: center;">
+        <button type="submit" class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal">Enemies Ahead</button>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Get To The Safe Zone</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form">
+            <form action="" method="post" style="padding-left:120px;padding-right:120px;">
+                {% csrf_token %}
+                <label for="password">Pass Code</label>
+                <input type="password" name="password" id="password" class="form-control" required>
+                <div style="margin-top: 30px;text-align: center;">
+                    <button type="submit" class="btn btn-outline-danger">Go Ahead</button>
+                </div>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

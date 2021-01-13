@@ -9,3 +9,7 @@ One can add new ornaments, generate bills, managing chits, total amount of gold 
 
 # Duration
 This project is done within a month.
+
+# Contact 
+For queries, contact me through linkedin.
+https://www.linkedin.com/in/abishek-marimuthu-0a7848126
